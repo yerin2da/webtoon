@@ -1,0 +1,75 @@
+<meta charset="UTF-8">
+<div class="view_setting_wrap">
+    <div class="tit">
+        <p>뷰어 설정</p>
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+    <div class="list_wrap">
+        <!--넘김 효과-->
+        <div class="list">
+            <p>넘김 효과</p>
+            <div class="effect_wrap">
+                <div class="slide_wrap">
+                    <input type="radio" name="effect-input" class="effect-input" id="slide-input">
+                    <label class="effect-label border" for="slide-input">슬라이드</label>
+                </div>
+                <div class="fade_wrap">
+                    <input type="radio" name="effect-input" class="effect-input" id="fade-input">
+                    <label class="effect-label border" for="fade-input">페이드</label>
+                </div>
+            </div>
+        </div>
+        <!--배경-->
+        <div class="list">
+            <p>배경</p>
+            <div class="bg_wrap">
+                <div class="white_wrap">
+                    <input type="radio" name="bg-input" class="bg-input" id="white-input">
+                    <label class="bg-label border" for="white-input">흰색</label>
+                </div>
+                <div class="black_wrap">
+                    <input type="radio" name="bg-input" class="bg-input" id="black-input">
+                    <label class="bg-label border" for="black-input">검정색</label>
+                </div>
+            </div>
+        </div>
+        <!--페이지 두쪽 보기-->
+        <div class="list">
+            <p>두 페이지 보기</p>
+            <div class="switch">
+                <input type="checkbox" name="switch-input" class="switch-input" id="switch-input">
+                <label class="switch-label" for="switch-input">
+                    <span class="switch-label-circle"></span>
+                </label>
+            </div>
+        </div>
+    </div><!--.list-->
+</div><!--.view_setting_wrap-->
+
+<script>
+    let isChecked = false;
+    // 넘김 효과
+    $('input[name="effect-input"]').click(function(){
+        $('label.effect-label').removeClass('checked');
+        $(this).siblings('.effect-label.border').addClass('checked');
+    });
+
+    // 배경
+    $('input[name="bg-input"]').click(function(){
+        $('label.bg-label').removeClass('checked');
+        $(this).siblings('.bg-label.border').addClass('checked');
+    });
+
+    //페이지 두쪽 보기 클릭시
+    $('.switch-input').click(function(){
+        isChecked = $(this).is(':checked');
+
+        if(isChecked){
+            //배경 초록, 원 오른쪽이동
+            $('.switch-label, .switch-label-circle').addClass('checked');
+        }else{
+            $('.switch-label, .switch-label-circle').removeClass('checked');//초기화
+        }
+    });
+
+</script>

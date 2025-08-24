@@ -1,0 +1,47 @@
+<meta charset="UTF-8">
+<div class="episode_btn_wrap">
+    <div class="prev">
+        <a href="#" title="이전화 바로가기">
+            <i class="fa-solid fa-angle-left"></i>
+            이전화
+        </a>
+    </div>
+    <div class="bar">&nbsp;</div>
+    <div class="next">
+        <a href="#" title="다음화 바로가기">
+            다음화
+            <i class="fa-solid fa-angle-right"></i>
+        </a>
+    </div>
+</div><!--.episode_btn_wrap-->
+
+<script>
+    let isChecked = false;
+    // 넘김 효과
+    $('input[name="effect-input"]').click(function(){
+        $('label.effect-label').removeClass('checked');
+        $(this).siblings('.effect-label.border').addClass('checked');
+    });
+
+    // 배경
+    $('input[name="bg-input"]').click(function(){
+        $('label.bg-label').removeClass('checked');
+        $(this).siblings('.bg-label.border').addClass('checked');
+    });
+
+    //페이지 두쪽 보기 클릭시
+    $('.switch-input').click(function(){
+        isChecked = $(this).is(':checked');
+
+        if(isChecked){
+            //배경 초록, 원 오른쪽이동
+            $('.switch-label, .switch-label-circle').addClass('checked');
+        }else{
+            $('.switch-label, .switch-label-circle').removeClass('checked');//초기화
+        }
+    });
+
+
+
+
+</script>
