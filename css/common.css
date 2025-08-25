@@ -98,6 +98,7 @@ label{
 .wrap {
 	width: 100%;
 	height: 100vh;
+	margin: 0 auto;
 }
 
 header, main, footer{
@@ -134,7 +135,7 @@ header .tit_wrap{
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
-	font-weight: 600;
+	font-weight: 700;
 }
 
 /*======episode_btn_wrap======*/
@@ -158,6 +159,7 @@ header .tit_wrap{
 .episode_btn_wrap a{
 	display: flex;
 	align-items: center;
+	gap: 5px;
 }
 .episode_btn_wrap .next{
 	color: var(--black);
@@ -169,7 +171,7 @@ main{
 }
 main .content{
 	height: calc(100vh - 65px);
-	/*background: #737373;*/
+	/*height: calc(100vh - 65px);*/
 }
 
 /*======swiper slide======*/
@@ -211,21 +213,6 @@ main .content{
 	100% {
 		transform: scale(1);
 	}
-}
-.slide-txt{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	color: #fff;
-	font-weight: 600;
-}
-.slide-txt .txt-top{
-	font-size: 1.5rem;
-	padding-bottom: 30px;
-}
-.slide-txt .txt-bot{
-	font-size: 4rem;
 }
 
 /*페이지네이션*/
@@ -310,7 +297,7 @@ main .content{
 /*오른쪽 메뉴바*/
 .right_menu_wrap{
 	position: absolute;
-	right: 4px;
+	right: 20px;
 	bottom: 20px;
 	z-index: 10;
 	display: flex;
@@ -332,15 +319,23 @@ main .content{
 }
 
 /*======view_setting_wrap======*/
+.view_setting_toggle{
+	position: relative;
+}
+#view_setting {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	z-index: 10;
+}
 .view_setting_wrap{
 	width: 300px;
 	background: var(--white);
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	border : 1px solid var(--border-gray);
-	padding: var(--p-base);
+	padding: var(--p-xl);
 	border-radius: var(--radius-xl);
-	/*display: flex;*/
-	display: none;
+	display: flex;
 	flex-flow: column;
 	justify-content: center;
 	gap: 30px;
@@ -358,15 +353,14 @@ main .content{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	font-weight: 600;
+	font-weight: 400;
 	font-size: var(--smFont);
-	padding-bottom: 10px;
+	padding-bottom: 15px;
 }
 .view_setting_wrap .list_wrap > .list > div{
 	display: flex;
 	align-items: center;
 	gap: 5px;
-	font-weight: 500;
 }
 .view_setting_wrap .list_wrap label.border{
 	display: inline-block;
@@ -377,32 +371,16 @@ main .content{
 	border: 1px solid var(--border-gray);
 	background: var(--white);
 	color: var(--text-gray);
+	font-weight: 400;
 }
-.view_setting_wrap .list_wrap label.effect-label.border.checked,
-.view_setting_wrap .list_wrap label.bg-label.border.checked
-{
+/* 체크된 라디오와 연결된 label 스타일 */
+.view_setting_wrap input[type="radio"]:checked + label.border {
 	border: 1px solid var(--mainColor);
 	background: var(--mainColor);
-	color: var(--white);
+	color: #fff;
 	font-weight: 600;
 }
-
-/*배경색*/
-.view_setting_wrap .bg_wrap > .circle {
-	width: 25px;
-	height: 25px;
-	border-radius: 50%;
-}
-.view_setting_wrap .bg_wrap .bg_white{
-	background: var(--white);
-	border: 2px solid var(--mainColor);
-}
-.view_setting_wrap .bg_wrap .bg_black{
-	background: var(--black);
-	border: 2px solid transparent;
-}
-
-/*페이지 두쪽 보기*/
+/*상하단바 숨기기*/
 .view_setting_wrap .switch-label {
 	display: block;
 	width: 44px;
@@ -410,11 +388,11 @@ main .content{
 	background: var(--gray-200);
 	border-radius: var(--radius-xl);
 	position: relative;
+	cursor: pointer;
 }
-.view_setting_wrap .switch-label.checked{
-	background: var(--mainColor);
-}
-.view_setting_wrap .switch-label-circle {
+
+/* 원 */
+.view_setting_wrap .switch-label .switch-label-circle {
 	display: block;
 	width: 20px;
 	height: 20px;
@@ -426,105 +404,61 @@ main .content{
 	transform: translateY(-50%);
 	transition: 0.3s;
 }
-.view_setting_wrap .switch-label-circle.checked{
+
+/* 체크 상태 */
+.switch-input:checked + .switch-label {/*숨기기 on*/
+	background: var(--mainColor);
+}
+header{
+	height: 65px;
+}
+header .content{
+	background: var(--white);
+}
+.switch-input:checked + .switch-label .switch-label-circle {
 	left: 22px;
 }
 
-/* ===== 플립 ===== */
+/* ===== 책넘김 슬라이드 ===== */
 #flip{
 	width: 100%;
 	height: 100%;
-	background: var(--mainBg)!important;
-
-}
-
-#mybook{
-	width: 100% !important;
-	height: 100% !important;
-	margin: 0 !important;
-}
-.b-page{
-	height: 100% !important;
-}
-.b-wrap{
-	min-width: 500px;
-	padding: 10px 0 !important;
-    background: var(--mainBg)!important;
-}
-
-#mybook .img_wrap{
-	width: 100% !important;
-	height: 100% !important;
-	overflow: hidden;
+	/*background: var(--mainBg)!important;*/
 	display: flex;
-}
-#mybook .b-page:nth-of-type(odd) .img_wrap{/*홀*/
-    justify-content: end;
-}
-#mybook .b-page:nth-of-type(even) .img_wrap{/*짝*/
-     justify-content: start;
-}
-#mybook .img_wrap img{
-	height: 100% !important;
-}
-.booklet .b-arrow-prev{
-	left: 0 !important;
-}
-.booklet .b-arrow-next{
-	right: 0 !important;
-}
-.booklet .b-arrow-prev div {
-	background-image: url("../img/prev_btn.svg") !important;
-}
-.booklet .b-arrow-next div {
-	background-image: url("../img/next_btn.svg") !important;
+	align-items: center;
+	justify-content: center;
 }
 
-/*#mybook .b-page{*/
-/*	width: 50% !important;*/
+/*===== 미디어쿼리 =====*/
+/* ===== PC ===== */
+@media screen and (min-width: 1180px) {
 
-/*	height: 100% !important;*/
-/*	top: 7px !important;*/
-/*	padding: 0 !important;*/
-/*}*/
-/*#mybook .b-wrap{*/
-/*	width: 100%!important;*/
-/*	height: 100% !important;*/
-/*	padding: 0 !important;*/
-/*}*/
-/*#mybook > .b-page:nth-child(even) {!*짝수*!*/
-/*	left:50% !important;*/
-/*}*/
-/*#mybook .swiper-slide{*/
-/*	width: 100% !important;*/
-/*}*/
+}
 
+/* ===== 태블릿 ===== */
+@media screen and (min-width: 768px) and (max-width: 1179px) {
+	body {
+		background-color: #ccffcc;
+	}
+	.wrap {
+		width: 90%;
+	}
+}
 
-/* ===== 모바일 (최대 767px) ===== */
+/* ===== 모바일 ===== */
 @media screen and (max-width: 767px) {
 	body {
 		background-color: #ffcccc;
 	}
-	.container {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 auto;
-	}
-}
-/* ===== 태블릿 (768px ~ 1024px) ===== */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-	body {
-		background-color: #ccffcc;
-	}
-	.container {
+	.wrap {
 		width: 90%;
-		max-width: 800px;
-		margin: 0 auto;
 	}
 }
 
-/* ===== PC (1025px 이상) ===== */
-@media screen and (min-width: 1025px) {
-
+img{
+	filter: brightness(10%);
 }
 
+header .tit_wrap, #episode_btn{
+	display: none;
+}

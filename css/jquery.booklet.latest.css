@@ -69,8 +69,8 @@
 	.booklet .b-arrow div      {display:none; text-indent:-9999px; height:170px; width:74px; position:absolute; left:0; top:25%;}
 	.booklet .b-arrow-next     {right:-80px;}
 	.booklet .b-arrow-prev     {left:-80px;}
-	.booklet .b-arrow-next div {background:url("../img/next_btn.svg") no-repeat left top;}
-	.booklet .b-arrow-prev div {background:url("../img/prev_btn.svg") no-repeat left top;}
+	.booklet .b-arrow-next div {background:url("../img/next_btn.svg") no-repeat center center;}
+	.booklet .b-arrow-prev div {background:url("../img/prev_btn.svg") no-repeat center center;}
 		
 /* @z-index fix (needed for older IE browsers)
 ----------------------------------------*/

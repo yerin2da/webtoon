@@ -11,11 +11,15 @@
             <div class="effect_wrap">
                 <div class="slide_wrap">
                     <input type="radio" name="effect-input" class="effect-input" id="slide-input">
-                    <label class="effect-label border" for="slide-input">슬라이드</label>
+                    <label class="effect-label border checked" for="slide-input">슬라이드</label>
                 </div>
                 <div class="fade_wrap">
                     <input type="radio" name="effect-input" class="effect-input" id="fade-input">
                     <label class="effect-label border" for="fade-input">페이드</label>
+                </div>
+                <div class="flip_wrap">
+                    <input type="radio" name="effect-input" class="effect-input" id="flip-input">
+                    <label class="effect-label border" for="flip-input">책넘김</label>
                 </div>
             </div>
         </div>
@@ -33,9 +37,9 @@
                 </div>
             </div>
         </div>
-        <!--페이지 두쪽 보기-->
+        <!--상하단바 숨기기-->
         <div class="list">
-            <p>두 페이지 보기</p>
+            <p>상 · 하단바 숨기기</p>
             <div class="switch">
                 <input type="checkbox" name="switch-input" class="switch-input" id="switch-input">
                 <label class="switch-label" for="switch-input">
@@ -47,29 +51,33 @@
 </div><!--.view_setting_wrap-->
 
 <script>
-    let isChecked = false;
-    // 넘김 효과
-    $('input[name="effect-input"]').click(function(){
-        $('label.effect-label').removeClass('checked');
-        $(this).siblings('.effect-label.border').addClass('checked');
-    });
+    // 상하단바 숨기기
+    $('.switch-input').click(function() {
+        let isChecked = $(this).is(':checked');
 
-    // 배경
-    $('input[name="bg-input"]').click(function(){
-        $('label.bg-label').removeClass('checked');
-        $(this).siblings('.bg-label.border').addClass('checked');
-    });
-
-    //페이지 두쪽 보기 클릭시
-    $('.switch-input').click(function(){
-        isChecked = $(this).is(':checked');
-
-        if(isChecked){
-            //배경 초록, 원 오른쪽이동
-            $('.switch-label, .switch-label-circle').addClass('checked');
-        }else{
-            $('.switch-label, .switch-label-circle').removeClass('checked');//초기화
+        if (isChecked) {
+            if ($('header').length) $('header .content').slideUp(300);// header가 있으면 슬라이드 업
+            if ($('footer').length) $('footer').slideUp(300);// footer가 있으면 슬라이드 업
+        } else {
+            if ($('header').length) $('header .content').slideDown(300);
+            if ($('footer').length) $('footer').slideDown(300);
         }
     });
+
+    $('input[name="bg-input"]').change(function() {
+        if (this.id === 'white-input') {
+            // 라이트 모드: 배경 흰색, 글자 검은색
+            document.documentElement.style.setProperty('--white', '#fff');
+            document.documentElement.style.setProperty('--black', '#000');
+            document.documentElement.style.setProperty('--text-gray', '#9ca3af');
+        } else if (this.id === 'black-input') {
+            // 다크 모드: 배경 검은색, 글자 흰색
+            document.documentElement.style.setProperty('--white', '#000');
+            document.documentElement.style.setProperty('--black', '#fff');
+            document.documentElement.style.setProperty('--text-gray', '#fff');
+        }
+    });
+
+
 
 </script>

@@ -38,8 +38,7 @@
             <div id="episode_btn"></div>
 
         </div>
-        <!--뷰어 설정-->
-        <div id="view_setting"></div>
+
     </header>
 
 
@@ -47,23 +46,27 @@
     <main>
         <div class="content">
             <!--슬라이드-->
-<!--            <div id="slide"></div>-->
+            <div id="slide"></div>
 
             <div id="flip"></div>
         </div>
-        <!-- 페이지네이션 -->
-        <div class="pagination_wrap">
-            <!-- 프로그레스바 -->
-            <div class="swiper-pagination-progress"></div>
-            <!-- 동그라미 -->
-            <div class="swiper-pagination-bullets"></div>
-        </div>
-        <!-- 네비게이션 -->
-        <div class="navigation_wrap">
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-        <!--오른쪽 메뉴바-->
+<!--        &lt;!&ndash; 페이지네이션 &ndash;&gt;-->
+<!--        <div class="pagination_wrap">-->
+<!--            &lt;!&ndash; 프로그레스바 &ndash;&gt;-->
+<!--            <div class="swiper-pagination-progress"></div>-->
+<!--            &lt;!&ndash; 동그라미 &ndash;&gt;-->
+<!--            <div class="swiper-pagination-bullets"></div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; 네비게이션 &ndash;&gt;-->
+<!--        <div class="navigation_wrap">-->
+<!--            <div class="swiper-button-prev"></div>-->
+<!--            <div class="swiper-button-next"></div>-->
+<!--        </div>-->
+
+    </main>
+
+    <!--오른쪽 메뉴바-->
+    <div class="view_setting_toggle">
         <div class="right_menu_wrap">
             <div class="view_setting_btn">
                 <img src="./img/view_setting.svg" alt="뷰어설정">
@@ -72,9 +75,13 @@
                 <img src="./img/reset.svg" alt="처음으로 돌아가기">
             </div>
         </div>
-    </main>
+        <!--뷰어 설정-->
+        <div id="view_setting"></div>
+    </div>
 
-
+    <footer>
+        푸터
+    </footer>
 
 </div><!--.wrap end-->
 
@@ -84,118 +91,145 @@
 
     //슬라이드
     $("#slide").load("slide.html");
-    // $("#flip").load("flip.html");
 
     //뷰어설정
-    // $("#view_setting").load("view_setting.html");
+    $("#view_setting").load("view_setting.html");
 
-    <!-- Initialize Swiper -->
-    $("#slide").load("slide.html", function() {//slide.html 로딩된 이후 시작
+    //뷰어설정
+    $('#view_setting').hide();
+    $('.view_setting_btn').click(function (){
+        $('#view_setting').fadeIn(300);//0.3초
+    });
+    $(document).on('click', '#view_setting i.fa-xmark',function (){
+        $('#view_setting').fadeOut(300);//0.3초
+    });
+
+    // Swiper 초기화
+    $("#slide").load("slide.html", function () {
+        slide_reset('');//기본 슬라이드
+    });
+    //넘김효과 선택
+    $(document).on('change', 'input[name="effect-input"]', function () {
+        // 현재 선택된 것만 checked
+        $('input[name="effect-input"]').prop('checked', false);
+        $(this).prop('checked', true);
+
+        //넘김 효과
+        let selectedEffect = '';
+        if (this.id === 'fade-input') {//페이드
+            selectedEffect = 'fade';
+            // Swiper 초기화
+            $("#slide").load("slide.html", function () {
+                slide_reset(selectedEffect);
+                $("#flip").hide();
+                $("#slide").show();
+                $('input[name="fade-input"]').prop('checked', true);
+            });
+
+        } else if (this.id === 'flip-input') {// 플립
+            $("#flip").load("slide2.html", function() {
+                $("#slide").hide();
+                $("#flip").show();
+                flip_slide();
+            });
+
+        } else {
+            selectedEffect = ''; // 기본 슬라이드
+            // Swiper 초기화
+            $("#slide").load("slide.html", function () {
+                slide_reset(selectedEffect);
+                $("#flip").hide();
+                $("#slide").show();
+            });
+        }
+    });
+
+    //슬라이드 초기설정
+    function slide_reset(selectedEffect){
         const progressCircle = document.querySelector(".autoplay-progress svg");
         const progressContent = document.querySelector(".autoplay-progress span");
+
         var swiper = new Swiper(".mySwiper", {
             spaceBetween: 30,
-            effect: "fade",
+            effect: selectedEffect, // 선택된 효과 적용
             centeredSlides: true,
-            // autoplay: {
-            //     delay: 5000,
-            //     disableOnInteraction: false
-            // },
             pagination: {
-                el: ".swiper-pagination-bullets", // 동그라미
-                clickable: true,
-                // type: "progressbar",
+                el: ".swiper-pagination-bullets",
+                clickable: true
             },
             keyboard: {
-                enabled: true,
+                enabled: true
             },
             scrollbar: {
-                el: ".swiper-scrollbar",
+                el: ".swiper-scrollbar"
             },
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev"
             },
+            // 마우스휠
+            mousewheel: {
+                invert: false,    // false: 아래로 → 다음 슬라이드
+                sensitivity: 1,   // 감도
+            },
+            // 키보드
+            keyboard: {
+                enabled: true,    // 키보드 이벤트 활성화
+                onlyInViewport: true, // 화면 안에서만 작동
+            },
             on: {
-                slideChange: function() {
-                    // progressbar 업데이트
+                slideChange: function () {
                     let progress = ((this.realIndex + 1) / this.slides.length) * 100;
                     document.querySelector(".swiper-pagination-progress").style.width = progress + "%";
                 }
             }
         });
-    });
+    }
 
-    // 플립
-    $("#flip").load("flip.html", function() {
-
-        const progressCircle = document.querySelector(".autoplay-progress svg");
-        const progressContent = document.querySelector(".autoplay-progress span");
-        var swiper = new Swiper(".perspective", {
-            // spaceBetween: 30,
-            // effect: "card",
-            pagination: {
-                el: ".swiper-pagination-bullets", // 동그라미
-                clickable: true,
-                // type: "progressbar",
+    function flip_slide() {
+        let swiperPerspective = new Swiper(".mySwiper.perspective", {
+            slidesPerView: 1,
+            centeredSlides: false,
+            speed: 1000,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
             },
-            coverflowEffect: {
-                rotate: 30, // 회전 정도
-                stretch: 0,
-                depth: 150, // 원근감
-                modifier: 1,
-                slideShadows: true, // 그림자
+            pagination: {
+                el: ".swiper-pagination-bullets",
+                clickable: true,
+            },
+            mousewheel: {
+                invert: false,
+                sensitivity: 1,
             },
             keyboard: {
                 enabled: true,
+                onlyInViewport: true,
             },
-            scrollbar: {
-                el: ".swiper-scrollbar",
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev"
+            effect: "creative",
+            creativeEffect: {
+                prev: {
+                    shadow: false,
+                    translate: ["-100%", 0, -400],
+                    rotate: [0, -180, 0],
+                },
+                next: {
+                    shadow: false,
+                    // translate: ["100%", 0, -400],
+                    // rotate: [0, 180, 0],
+                },
             },
             on: {
-                slideChange: function() {
-                    // progressbar 업데이트
-                    let progress = ((this.realIndex + 1) / this.slides.length) * 100;
-                    document.querySelector(".swiper-pagination-progress").style.width = progress + "%";
+                slideChange: function () {
+                    const progressBar = document.querySelector("#flip .swiper-pagination-progress");
+                    if (progressBar) {
+                        progressBar.style.width = ((this.realIndex + 1) / this.slides.length * 100) + "%";
+                    }
                 },
-                // slideChangeTransitionStart: function () {
-                //     const slides = document.querySelectorAll('.swiper-slide img');
-                //     slides.forEach((img, index) => {
-                //         if(index === swiper.activeIndex) {
-                //             img.style.transform = 'rotateY(-0deg)';      // 현재 슬라이드는 앞쪽
-                //         } else if(index < swiper.activeIndex) {
-                //             img.style.transform = 'rotateY(-180deg)';   // 이전
-                //         } else {
-                //             img.style.transform = 'rotateY(-180deg)';    // 다음
-                //         }
-                //     });
-                // },
             }
         });
-
-        $(function () {
-            $("#mybook").booklet({
-                width: 100 + '%', height: 100 + '%',
-                closed: true,
-                pageNumbers: false,
-                hovers: true,
-                // next: "#next_page_button",
-                prev:"#prev_page_button",
-                hoverWidth: 0,
-                arrows: true
-            });
-            //
-            // var next = $(".selector").booklet( "option", "next" );
-            // var prev = $(".selector").booklet( "option", "prev" );
-            // $(".selector").booklet( "option", "next", "#next_page_button" );
-            // $(".selector").booklet( "option", "prev", "#prev_page_button" );
-
-        });
-    });
+    }
 
 </script>
 </body>
