@@ -195,6 +195,8 @@
     function flip_slide() {
         let swiperPerspective = new Swiper(".mySwiper.perspective", {
             slidesPerView: 1,
+            spaceBetween: 0,
+            rtl: true,
             centeredSlides: false,
             speed: 1000,
             navigation: {
@@ -217,13 +219,13 @@
             creativeEffect: {
                 prev: {
                     shadow: false,
-                    translate: ["-100%", 0, -400],
+                    translate: ["-100%", 0, -400],//x축, y축, z축
                     rotate: [0, -180, 0],
                 },
                 next: {
                     shadow: false,
-                    // translate: ["100%", 0, -400],
-                    // rotate: [0, 180, 0],
+                    // translate: ["-100%", 0, -400],
+                    rotate: [0, 0, 0],
                 },
             },
             on: {
@@ -237,6 +239,14 @@
         });
     }
 
+</script>
+
+<script>
+    //ios safari height 100vh
+    window.addEventListener("DOMContentLoaded", function (ev) {
+        const { innerHeight } = window;
+        document.documentElement.style.setProperty("--app-height",`${innerHeight}px`);
+    });
 </script>
 </body>
 </html>
