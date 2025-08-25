@@ -17,16 +17,26 @@
     <link rel="stylesheet" href="../css/jquery.booklet.latest.css" />
 
     <script src="/js/jquery.booklet.latest.js"></script>
-
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js"
+    type="module"></script>
 </head>
 <body>
 <div class="wrap">
+    <div class="lottie_img_wrap">
+        <dotlottie-wc
+            id="introAnim"
+            src="https://lottie.host/a5f1cad7-1a3e-4105-9168-dec688961643/qMuRvRIt5c.lottie"
+            style="width: 100%;height: 100%"
+            speed="1"
+            autoplay
+            loop
+        >
+        </dotlottie-wc>
+    </div>
+
     <!--헤더-->
     <header>
         <div class="content">
-            <!--로고-->
-            <h1><a href="#" title="메인페이지로 이동">logo</a></h1>
-
             <!--제목-->
             <div class="tit_wrap">
                 <div class="tit">위치 워치</div>
@@ -36,18 +46,16 @@
 
             <!--이전화, 다음화-->
             <div class="episode_btn pc"></div>
-
-            <!--mob 위쪽 뷰어설정-->
-            <div class="view_setting_toggle mob">
-                <div class="view_setting_toggle_wrap">
-                    <div class="view_setting_btn">
-                        <img src="./img/view_setting.svg" alt="뷰어설정">
-                    </div>
-                </div>
-            </div><!--.view_setting_toggle .mob end-->
-
         </div>
 
+        <!--mob 위쪽 뷰어설정-->
+        <div class="view_setting_toggle mob">
+            <div class="view_setting_toggle_wrap">
+                <div class="view_setting_btn">
+                    <img src="./img/view_setting.svg" alt="뷰어설정">
+                </div>
+            </div>
+        </div><!--.view_setting_toggle .mob end-->
     </header>
 
     <!--메인-->
@@ -66,7 +74,7 @@
             <div class="view_setting_btn">
                 <img src="./img/view_setting.svg" alt="뷰어설정">
             </div>
-            <div class="reset_btn">
+            <div class="go_first">
                 <img src="./img/reset.svg" alt="처음으로 돌아가기">
             </div>
         </div>
@@ -81,7 +89,7 @@
             <!--설정-->
             <div class="view_setting_toggle mob">
                 <div class="view_setting_toggle_wrap">
-                    <div class="reset_btn">
+                    <div class="go_first">
                         <img src="./img/reset.svg" alt="처음으로 돌아가기">
                     </div>
 
@@ -96,6 +104,8 @@
 </div><!--.wrap end-->
 
 <script>
+    let swiper; // 전역에 선언
+
     //이전화, 다음화
     $(".episode_btn").load("episode_btn.html");
 
@@ -117,6 +127,20 @@
     // Swiper 초기화
     $("#slide").load("slide.html", function () {
         slide_reset('');//기본 슬라이드
+        // intro_animation();
+    });
+
+    function intro_animation(){
+        const intro = $('.lottie_img_wrap');
+
+        // 3초 후 서서히 사라지기
+        setTimeout(() => {
+            intro.fadeOut(500); // 0.5초 동안 사라짐
+        }, 3000); // 3초 후 실행
+    }
+
+    $('.go_first').click(function (){
+        swiper.slideToLoop(0);//슬라이드 맨 처음으로 이동
     });
     //넘김효과 선택
     $(document).on('change', 'input[name="effect-input"]', function () {
@@ -158,7 +182,7 @@
         const progressCircle = document.querySelector(".autoplay-progress svg");
         const progressContent = document.querySelector(".autoplay-progress span");
 
-        var swiper = new Swiper(".mySwiper", {
+         swiper = new Swiper(".mySwiper", {
             spaceBetween: 30,
             effect: selectedEffect, // 선택된 효과 적용
             centeredSlides: true,
@@ -193,7 +217,7 @@
     }
 
     function flip_slide() {
-        let swiperPerspective = new Swiper(".mySwiper.perspective", {
+         swiper = new Swiper(".mySwiper.perspective", {
             slidesPerView: 1,
             spaceBetween: 0,
             rtl: true,
@@ -241,12 +265,12 @@
 
 </script>
 
-<script>
-    //ios safari height 100vh
-    window.addEventListener("DOMContentLoaded", function (ev) {
-        const { innerHeight } = window;
-        document.documentElement.style.setProperty("--app-height",`${innerHeight}px`);
-    });
-</script>
+<!--<script>-->
+<!--    //ios safari height 100vh-->
+<!--    window.addEventListener("DOMContentLoaded", function (ev) {-->
+<!--        const { innerHeight } = window;-->
+<!--        document.documentElement.style.setProperty("&#45;&#45;app-height",`${innerHeight}px`);-->
+<!--    });-->
+<!--</script>-->
 </body>
 </html>

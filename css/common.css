@@ -5,9 +5,10 @@
 	--black: #333;
 	--mainBg: #f9fafb;
 	--smFont: clamp(12px, 1.5vw, 14px);
-	--baseFont: clamp(14px, 1.5vw, 16px);
-	--lgFont: clamp(16px, 1.5vw, 18px);
-	--xlFont: clamp(18px, 1.5vw, 20px);
+	--mdFont: clamp(14px, 1.5vw, 16px);
+	--baseFont: clamp(16px, 1.5vw, 18px);
+	--lgFont: clamp(18px, 1.5vw, 20px);
+	--xlFont: clamp(20px, 1.5vw, 22px);
 
 	--text-gray: #9ca3af;
 	--border-gray :#f3f4f6;
@@ -95,6 +96,22 @@ input[type="checkbox"],input[type="radio"]{
 	margin: 0 auto;
 }
 
+/*로티 이미지*/
+.lottie_img_wrap{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 80px;
+	height: 80px;
+	background: #2c2c2cd1;
+	z-index: 10;
+	border-radius: var(--radius-base);
+}
+.dotlottie-wc {
+	/*width: 50%;*/
+	height: auto;
+}
 header, main, footer{
 	width: 100%;
 	max-width: 1000px;
@@ -108,6 +125,7 @@ header, main, footer{
 }
 /*헤더*/
 header{
+	position: relative;
 	height: 65px;
 }
 header .content {
@@ -116,18 +134,13 @@ header .content {
 	height: 65px;
 	background: var(--white);
 	font-size: var(--baseFont);
-	padding: 0 20px;
-}
-h1 {
-	margin: 0;
-	font-size: var(--xlFont);
 }
 header .tit_wrap{
 	white-space: nowrap;
 	flex: 1;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: start;
 	gap: 10px;
 	font-weight: 700;
 }
@@ -140,10 +153,11 @@ header .tit_wrap .sub_tit .ep_box{
 	background: var(--gray-200);
 	color: #333;
 	margin-right: 5px;
+	font-size: var(--mdFont);
 }
 /*======episode_btn_wrap======*/
 .episode_btn_wrap{
-	/*width: 150px;*/
+	width: fit-content;
 	display: flex;
 	align-items: center;
 	justify-content: end;
@@ -165,6 +179,7 @@ header .tit_wrap .sub_tit .ep_box{
 	display: flex;
 	align-items: center;
 	gap: 5px;
+	font-size: var(--mdFont);
 }
 .episode_btn_wrap .next{
 	color: var(--black);
@@ -180,6 +195,7 @@ main .content{
 
 /*======swiper slide======*/
 #slide{
+	position: relative;
 	width: 100%;
 	height: 100%;
 }
@@ -200,18 +216,21 @@ main .content{
 }
 .swiper-slide .img_wrap{
 	width: 100%;
-	height: 95%;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
 }
 .swiper-slide img {
-	/*width: 100%;*/
 	height: 100%;
 }
+
 .swiper-slide .slide1{
-	/*animation: fadezoom 4s 0s forwards;*/
+/*animation: fadezoom 2s 0s forwards;*/
+}
+.swiper-slide .slide7{
+	max-width: 96%;
 }
 @keyframes fadezoom{
 	0% {
@@ -229,7 +248,7 @@ main .content{
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 2;
+	z-index: 3;
 	background: var(--white);
 	background: var(--gray-50);
 }
@@ -301,12 +320,13 @@ main .content{
 	font-size: 35px !important;
 }
 
-/*오른쪽 메뉴바*/
-
-
 /*======view_setting_wrap======*/
 .view_setting_toggle{
 	position: relative;
+}
+.view_setting_toggle.pc{
+	width: 1000px;
+	margin: 0 auto;
 }
 .view_setting_toggle > .view_setting_toggle_wrap{
 	position: absolute;
@@ -315,7 +335,7 @@ main .content{
 	z-index: 10;
 	display: flex;
 	flex-flow: column;
-	align-items: center;
+	align-items: end;
 	justify-content: center;
 	gap: 5px;
 }
@@ -341,7 +361,7 @@ main .content{
 	z-index: 10;
 }
 .view_setting_wrap{
-	width: 300px;
+	width: 380px;
 	background: var(--white);
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	border : 1px solid var(--border-gray);
@@ -372,13 +392,13 @@ main .content{
 	align-items: center;
 	justify-content: space-between;
 	font-weight: 400;
-	font-size: var(--smFont);
+	font-size: var(--mdFont);
 	padding-bottom: 15px;
 }
 .view_setting_wrap .list_wrap > .list > div{
 	display: flex;
 	align-items: center;
-	gap: 5px;
+	gap: 10px;
 }
 .view_setting_wrap .list_wrap label.border{
 	display: inline-block;
@@ -463,7 +483,29 @@ footer .content {
 	font-size: var(--baseFont);
 	padding: 0 20px;
 }
-
+/*좌우 클릭시 슬라이드 넘기기*/
+.navigation_wrap {
+	top: 0;
+	transform: none;
+	height: 100%;
+}
+.swiper-button-next,
+.swiper-button-prev{
+	width: 50% !important;
+	height: 100% !important;
+	bottom: 0!important;
+	top: unset!important;
+}
+.swiper-button-next:after,
+.swiper-button-prev:after{
+	display: none;
+}
+.swiper-button-prev{
+	left: 0!important;
+}
+.swiper-button-next{
+	right: 0!important;
+}
 /* ===== PC ===== */
 @media screen and (min-width: 1180px) {
 	.mob{
@@ -471,22 +513,18 @@ footer .content {
 	}
 }
 
-/* ===== 태블릿,모바일 ===== */
+/* ===== 태블릿,모바일 공통 ===== */
 @media screen and (max-width: 1179px) {
-	body {
-		background-color: #ffcccc;
+	header .content{
+		padding: 0 20px;
+	}
+	header .view_setting_toggle.mob {
+		position: absolute;
+		right: 20px;
+		top: 12px;
 	}
 	main .content{
 		height: calc(100vh - 130px);
-	}
-	.swiper-slide {
-		transform-origin: left center; /* 중심을 오른쪽으로 이동 */
-	}
-	.swiper-slide .img_wrap  {
-		width: 90%;
-	}
-	.navigation_wrap{
-		display: none !important;
 	}
 	.view_setting_toggle > .view_setting_toggle_wrap {
 		position: unset;
@@ -500,6 +538,9 @@ footer .content {
 	#view_setting {
 		top: 20px ;
 	}
+	.view_setting_wrap {
+		width: 300px;
+	}
 	.pc{
 		display: none;
 	}
@@ -508,7 +549,54 @@ footer .content {
 	}
 
 }
+/* ===== 모바일 (최대 767px) ===== */
+@media screen and (max-width: 767px) {
+	h1, .tit, .bar{
+		display: none;
+	}
+	header .tit_wrap{
+		justify-content: start;
+	}
+	.view_setting_wrap{
+		padding: var(--p-lg);
+	}
 
+	.view_setting_wrap .list_wrap > .list p{
+		padding-bottom: 10px;
+	}
+	.view_setting_wrap .list_wrap label.border{
+		white-space: nowrap;
+	}
+}
+@media screen and (max-width: 460px) {
+	#view_setting{
+		width: 90%;
+		/*right: 0;*/
+		/*bottom: 0;*/
+		/*left: 50%;*/
+		/*top: 50%;*/
+		/*transform: translate(-50%, -50%);*/
+	}
+	.view_setting_wrap .list_wrap > .list > div {
+		flex-wrap: wrap;
+	}
+	.view_setting_wrap{
+		padding: var(--p-base);
+		width: unset;
+	}
+}
+@media screen and (max-width: 360px) {
+	#view_setting{
+		right: 0;
+		bottom: 0;
+		left: 50%;
+		/*top: 50%;*/
+		transform: translateX(-50%);
+	}
+	.view_setting_wrap .list_wrap > .list{
+		display: block;
+	}
+}
 img{
 	/*filter: brightness(2%);*/
 }
