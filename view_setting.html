@@ -2,7 +2,7 @@
 <div class="view_setting_wrap">
     <div class="tit">
         <p>뷰어 설정</p>
-        <i class="fa-solid fa-xmark"></i>
+        <div class="view_setting_close_btn"><i class="fa-solid fa-xmark"></i></div>
     </div>
     <div class="list_wrap">
         <!--넘김 효과-->
@@ -10,7 +10,7 @@
             <p>넘김 효과</p>
             <div class="effect_wrap">
                 <div class="slide_wrap">
-                    <input type="radio" name="effect-input" class="effect-input" id="slide-input">
+                    <input type="radio" name="effect-input" class="effect-input" id="slide-input" checked>
                     <label class="effect-label border checked" for="slide-input">슬라이드</label>
                 </div>
                 <div class="fade_wrap">
@@ -28,7 +28,7 @@
             <p>배경</p>
             <div class="bg_wrap">
                 <div class="white_wrap">
-                    <input type="radio" name="bg-input" class="bg-input" id="white-input">
+                    <input type="radio" name="bg-input" class="bg-input" id="white-input" checked>
                     <label class="bg-label border" for="white-input">흰색</label>
                 </div>
                 <div class="black_wrap">
@@ -56,11 +56,11 @@
         let isChecked = $(this).is(':checked');
 
         if (isChecked) {
-            if ($('header').length) $('header .content').slideUp(300);// header가 있으면 슬라이드 업
-            if ($('footer').length) $('footer').slideUp(300);// footer가 있으면 슬라이드 업
+            if ($('header').length) $('header .content').slideUp(300);// header가 있으면
+            if ($('footer').length) $('footer .content').slideUp(300);// footer가 있으면
         } else {
             if ($('header').length) $('header .content').slideDown(300);
-            if ($('footer').length) $('footer').slideDown(300);
+            if ($('footer').length) $('footer .content').slideDown(300);
         }
     });
 

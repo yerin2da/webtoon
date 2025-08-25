@@ -12,7 +12,7 @@
 	--text-gray: #9ca3af;
 	--border-gray :#f3f4f6;
 
-	--radius-sm: 2px;
+	--radius-sm: 3px;
 	--radius-base: 4px;
 	--radius-md: 6px;
 	--radius-lg: 8px;
@@ -64,17 +64,11 @@ img{
 	display: block;
 	object-fit: contain;
 }
-p{
-	margin: 0;
-}
-input[type="checkbox"], input[type="radio"] {
+p{margin: 0;}
+input[type="checkbox"],input[type="radio"]{
 	display: none;
 }
-label{
-	cursor: pointer;
-}
-.fa-solid{
-	/*font-size: var(--lgFont);*/
+.fa-solid,label{
 	cursor: pointer;
 }
 .button{
@@ -103,7 +97,6 @@ label{
 
 header, main, footer{
 	width: 100%;
-	/*max-width: 1200px;*/
 	max-width: 1000px;
 	margin: 0 auto;
 }
@@ -114,32 +107,43 @@ header, main, footer{
 	justify-content: center;
 }
 /*헤더*/
+header{
+	height: 65px;
+}
 header .content {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	justify-content: space-between!important;
+	width:unset!important;
 	height: 65px;
 	background: var(--white);
 	font-size: var(--baseFont);
-
-}
-header .content > *{
-	width: 33.3333%;
+	padding: 0 20px;
 }
 h1 {
 	margin: 0;
 	font-size: var(--xlFont);
 }
 header .tit_wrap{
+	white-space: nowrap;
+	flex: 1;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
 	font-weight: 700;
 }
-
+header .tit_wrap .sub_tit .ep_box{
+	display: inline-block;
+	width: fit-content;
+	height: fit-content;
+	padding: 2px 5px;
+	border-radius: var(--radius-sm);
+	background: var(--gray-200);
+	color: #333;
+	margin-right: 5px;
+}
 /*======episode_btn_wrap======*/
 .episode_btn_wrap{
+	/*width: 150px;*/
 	display: flex;
 	align-items: center;
 	justify-content: end;
@@ -155,6 +159,7 @@ header .tit_wrap{
 .episode_btn_wrap > .prev:hover,
 .episode_btn_wrap > .next:hover{
 	background: var(--gray-50);
+	color: #333;
 }
 .episode_btn_wrap a{
 	display: flex;
@@ -171,7 +176,6 @@ main{
 }
 main .content{
 	height: calc(100vh - 65px);
-	/*height: calc(100vh - 65px);*/
 }
 
 /*======swiper slide======*/
@@ -195,12 +199,15 @@ main .content{
 	position: relative;
 }
 .swiper-slide .img_wrap{
-	width: fit-content;
+	width: 100%;
 	height: 95%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	overflow: hidden;
 }
 .swiper-slide img {
-	width: 100%;
+	/*width: 100%;*/
 	height: 100%;
 }
 .swiper-slide .slide1{
@@ -295,7 +302,13 @@ main .content{
 }
 
 /*오른쪽 메뉴바*/
-.right_menu_wrap{
+
+
+/*======view_setting_wrap======*/
+.view_setting_toggle{
+	position: relative;
+}
+.view_setting_toggle > .view_setting_toggle_wrap{
 	position: absolute;
 	right: 20px;
 	bottom: 20px;
@@ -306,22 +319,21 @@ main .content{
 	justify-content: center;
 	gap: 5px;
 }
-.right_menu_wrap > div{
+.view_setting_toggle > .view_setting_toggle_wrap > div{
 	width: 45px;
 	height: 45px;
 	border-radius: 50%;
-	border: 1px solid var(--gray-200);
+	border: 1px solid var(--gray-100);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	background: white;
 	cursor: pointer;
 }
-
-/*======view_setting_wrap======*/
-.view_setting_toggle{
-	position: relative;
+.view_setting_toggle > .view_setting_toggle_wrap > div:hover{
+	border: 1px solid var(--gray-200);
 }
+
 #view_setting {
 	position: absolute;
 	right: 20px;
@@ -346,9 +358,15 @@ main .content{
 	justify-content: space-between;
 	font-weight: 700;
 }
-/*리스트*/
-.view_setting_wrap .list_wrap{
+.view_setting_wrap .view_setting_close_btn{
+	padding: 4px 8px;
+	text-align: center;
+	cursor: pointer;
 }
+.view_setting_wrap .view_setting_close_btn i.fa-xmark{
+	font-size: var(--xlFont);
+}
+/*리스트*/
 .view_setting_wrap .list_wrap > .list{
 	display: flex;
 	align-items: center;
@@ -372,6 +390,10 @@ main .content{
 	background: var(--white);
 	color: var(--text-gray);
 	font-weight: 400;
+	transition: 0.5s;
+}
+.view_setting_wrap .list_wrap label.border:hover{
+	border-color: var(--mainColor);
 }
 /* 체크된 라디오와 연결된 label 스타일 */
 .view_setting_wrap input[type="radio"]:checked + label.border {
@@ -406,14 +428,14 @@ main .content{
 }
 
 /* 체크 상태 */
+.switch-label{
+	transition: 0.3s;
+}
+.switch-input:hover + .switch-label {
+	background: var(--gray-300);
+}
 .switch-input:checked + .switch-label {/*숨기기 on*/
 	background: var(--mainColor);
-}
-header{
-	height: 65px;
-}
-header .content{
-	background: var(--white);
 }
 .switch-input:checked + .switch-label .switch-label-circle {
 	left: 22px;
@@ -423,42 +445,72 @@ header .content{
 #flip{
 	width: 100%;
 	height: 100%;
-	/*background: var(--mainBg)!important;*/
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-/*===== 미디어쿼리 =====*/
+/*푸터*/
+footer{
+	display: none;
+	height: 65px;
+}
+footer .content {
+	width: unset;
+	justify-content: space-between;
+	height: 65px;
+	background: var(--white);
+	font-size: var(--baseFont);
+	padding: 0 20px;
+}
+
 /* ===== PC ===== */
 @media screen and (min-width: 1180px) {
-
-}
-
-/* ===== 태블릿 ===== */
-@media screen and (min-width: 768px) and (max-width: 1179px) {
-	body {
-		background-color: #ccffcc;
-	}
-	.wrap {
-		width: 90%;
+	.mob{
+		display: none;
 	}
 }
 
-/* ===== 모바일 ===== */
-@media screen and (max-width: 767px) {
+/* ===== 태블릿,모바일 ===== */
+@media screen and (max-width: 1179px) {
 	body {
 		background-color: #ffcccc;
 	}
-	.wrap {
+
+	main .content{
+		height: calc(100vh - 130px);
+	}
+	.swiper-slide .img_wrap  {
 		width: 90%;
 	}
+	.navigation_wrap{
+		display: none !important;
+	}
+	.view_setting_toggle > .view_setting_toggle_wrap {
+		position: unset;
+	}
+	.view_setting_toggle > .view_setting_toggle_wrap > .view_setting_btn{
+		border: none;
+	}
+	.view_setting_toggle > .view_setting_toggle_wrap > .view_setting_btn:hover{
+		border:none;
+	}
+	#view_setting {
+		top: 20px ;
+	}
+	.pc{
+		display: none;
+	}
+	footer{
+		display: block !important;
+	}
+
 }
 
 img{
-	filter: brightness(10%);
+	/*filter: brightness(2%);*/
 }
 
 header .tit_wrap, #episode_btn{
-	display: none;
+	/*display: none;*/
 }

@@ -31,43 +31,38 @@
             <div class="tit_wrap">
                 <div class="tit">위치 워치</div>
                 <div class="bar">&nbsp;</div>
-                <div class="subtit">1화 마녀의 귀환</div>
+                <div class="sub_tit"><span class="ep_box">1화</span> 마녀의 귀환</div>
             </div>
 
             <!--이전화, 다음화-->
-            <div id="episode_btn"></div>
+            <div class="episode_btn pc"></div>
+
+            <!--mob 위쪽 뷰어설정-->
+            <div class="view_setting_toggle mob">
+                <div class="view_setting_toggle_wrap">
+                    <div class="view_setting_btn">
+                        <img src="./img/view_setting.svg" alt="뷰어설정">
+                    </div>
+                </div>
+            </div><!--.view_setting_toggle .mob end-->
 
         </div>
 
     </header>
 
-
     <!--메인-->
     <main>
         <div class="content">
             <!--슬라이드-->
-            <div id="slide"></div>
+            <div id="slide"></div><!--기본, 페이드 슬라이드-->
 
-            <div id="flip"></div>
+            <div id="flip"></div><!--책넘김 슬라이드-->
         </div>
-<!--        &lt;!&ndash; 페이지네이션 &ndash;&gt;-->
-<!--        <div class="pagination_wrap">-->
-<!--            &lt;!&ndash; 프로그레스바 &ndash;&gt;-->
-<!--            <div class="swiper-pagination-progress"></div>-->
-<!--            &lt;!&ndash; 동그라미 &ndash;&gt;-->
-<!--            <div class="swiper-pagination-bullets"></div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; 네비게이션 &ndash;&gt;-->
-<!--        <div class="navigation_wrap">-->
-<!--            <div class="swiper-button-prev"></div>-->
-<!--            <div class="swiper-button-next"></div>-->
-<!--        </div>-->
-
     </main>
 
-    <!--오른쪽 메뉴바-->
-    <div class="view_setting_toggle">
-        <div class="right_menu_wrap">
+    <!--pc 오른쪽 뷰어설정-->
+    <div class="view_setting_toggle pc">
+        <div class="view_setting_toggle_wrap">
             <div class="view_setting_btn">
                 <img src="./img/view_setting.svg" alt="뷰어설정">
             </div>
@@ -75,19 +70,34 @@
                 <img src="./img/reset.svg" alt="처음으로 돌아가기">
             </div>
         </div>
-        <!--뷰어 설정-->
-        <div id="view_setting"></div>
     </div>
 
+    <!--뷰어 설정-->
+    <div id="view_setting"></div>
+
+    <!--푸터-->
     <footer>
-        <div class="content">푸터</div>
+        <div class="content">
+            <!--설정-->
+            <div class="view_setting_toggle mob">
+                <div class="view_setting_toggle_wrap">
+                    <div class="reset_btn">
+                        <img src="./img/reset.svg" alt="처음으로 돌아가기">
+                    </div>
+
+                </div>
+            </div><!--.view_setting_toggle .mob end-->
+
+            <!--이전화, 다음화-->
+            <div class="episode_btn mob"></div>
+        </div>
     </footer>
 
 </div><!--.wrap end-->
 
 <script>
     //이전화, 다음화
-    $("#episode_btn").load("episode_btn.html");
+    $(".episode_btn").load("episode_btn.html");
 
     //슬라이드
     $("#slide").load("slide.html");
@@ -100,7 +110,7 @@
     $('.view_setting_btn').click(function (){
         $('#view_setting').fadeIn(300);//0.3초
     });
-    $(document).on('click', '#view_setting i.fa-xmark',function (){
+    $(document).on('click', '#view_setting .view_setting_close_btn',function (){
         $('#view_setting').fadeOut(300);//0.3초
     });
 
@@ -114,11 +124,10 @@
         $('input[name="effect-input"]').prop('checked', false);
         $(this).prop('checked', true);
 
-        //넘김 효과
-        let selectedEffect = '';
+        let selectedEffect = '';//넘김 효과
         if (this.id === 'fade-input') {//페이드
             selectedEffect = 'fade';
-            // Swiper 초기화
+
             $("#slide").load("slide.html", function () {
                 slide_reset(selectedEffect);
                 $("#flip").hide();
@@ -156,9 +165,6 @@
             pagination: {
                 el: ".swiper-pagination-bullets",
                 clickable: true
-            },
-            keyboard: {
-                enabled: true
             },
             scrollbar: {
                 el: ".swiper-scrollbar"
