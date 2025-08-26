@@ -37,6 +37,11 @@
 	--gray-900: #111827;
 
 }
+* {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
 html, body {
 	overflow: hidden;
 	caret-color: transparent;/*커서 깜빡임 없애기*/
@@ -404,7 +409,7 @@ main .content{
 	display: inline-block;
 	height: 25px;
 	line-height: 25px;
-	padding: 0 10px;
+	padding: 3px 10px;
 	border-radius: var(--radius-md);
 	border: 1px solid var(--border-gray);
 	background: var(--white);
