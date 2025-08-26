@@ -183,6 +183,7 @@ header .tit_wrap .sub_tit .ep_box{
 	align-items: center;
 	gap: 5px;
 	font-size: var(--mdFont);
+	white-space: nowrap;
 }
 .episode_btn_wrap .next{
 	color: var(--black);
@@ -327,7 +328,7 @@ main .content{
 .view_setting_toggle{
 	width: 100%;
 	position: absolute;
-	right: 10%;
+	/*right: 10%;*/
 	bottom: 25px;
 	z-index: 10;
 }
@@ -488,9 +489,6 @@ footer .content {
 	.pc{
 		display: none !important;
 	}
-	.mob{
-		/*display: block;*/
-	}
 	header .content{
 		padding: 0 20px;
 	}
@@ -526,14 +524,19 @@ footer .content {
 
 	.view_setting_toggle{
 		height: fit-content;
-		right: unset;
-		top: 7px;
+		top: 8px;
+	}
+	.setting_btn{
+		justify-content: start;
 	}
 	#view_setting{
 		right: 10px;
 		top: 10px;
 		bottom: unset;
 		padding: var(--p-lg);
+	}
+	.btn_border:hover{
+		border: 1px solid transparent;
 	}
 	/*다크모드일 때 색상반전*/
 	.btn_border{
@@ -565,7 +568,8 @@ footer .content {
 		flex-wrap: wrap;
 	}
 	#view_setting{
-		width: 80%;
+		width: fit-content;
+		right: 0;
 		padding: var(--p-base);
 	}
 	.view_setting_wrap .list_wrap > .list{
@@ -574,10 +578,4 @@ footer .content {
 	.view_setting_wrap .list_wrap > .list p{
 		padding-bottom: 10px;
 	}
-}
-img{
-	filter: brightness(6%);
-}
-header .content{
-	display: none;
 }
