@@ -47,15 +47,6 @@
             <!--이전화, 다음화-->
             <div class="episode_btn pc"></div>
         </div>
-
-        <!--mob 위쪽 뷰어설정-->
-        <div class="view_setting_toggle mob">
-            <div class="view_setting_toggle_wrap">
-                <div class="view_setting_btn">
-                    <img src="./img/view_setting.svg" alt="뷰어설정">
-                </div>
-            </div>
-        </div><!--.view_setting_toggle .mob end-->
     </header>
 
     <!--메인-->
@@ -68,36 +59,31 @@
         </div>
     </main>
 
-    <!--pc 오른쪽 뷰어설정-->
-    <div class="view_setting_toggle pc">
-        <div class="view_setting_toggle_wrap">
-            <div class="view_setting_btn">
+    <!--뷰어설정, 처음으로 돌아가기-->
+    <div class="view_setting_toggle">
+        <div class="content">
+            <div class="setting_btn btn_border">
                 <img src="./img/view_setting.svg" alt="뷰어설정">
             </div>
-            <div class="go_first">
+            <div class="go_first btn_border pc">
                 <img src="./img/reset.svg" alt="처음으로 돌아가기">
             </div>
         </div>
-    </div>
 
-    <!--뷰어 설정-->
-    <div id="view_setting"></div>
+        <!--뷰어 설정-->
+        <div id="view_setting"></div>
+    </div>
 
     <!--푸터-->
     <footer>
         <div class="content">
-            <!--설정-->
-            <div class="view_setting_toggle mob">
-                <div class="view_setting_toggle_wrap">
-                    <div class="go_first">
-                        <img src="./img/reset.svg" alt="처음으로 돌아가기">
-                    </div>
-
-                </div>
-            </div><!--.view_setting_toggle .mob end-->
+            <!--처음으로 돌아가기-->
+            <div class="go_first btn_border">
+                <img src="./img/reset.svg" alt="처음으로 돌아가기">
+            </div>
 
             <!--이전화, 다음화-->
-            <div class="episode_btn mob"></div>
+            <div class="episode_btn"></div>
         </div>
     </footer>
 
@@ -117,7 +103,7 @@
 
     //뷰어설정
     $('#view_setting').hide();
-    $('.view_setting_btn').click(function (){
+    $('.setting_btn').click(function (){
         $('#view_setting').fadeIn(300);//0.3초
     });
     $(document).on('click', '#view_setting .view_setting_close_btn',function (){

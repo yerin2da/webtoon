@@ -226,7 +226,7 @@ main .content{
 	overflow: hidden;
 }
 .swiper-slide img {
-	height: 100%;
+	height: 95%;
 }
 
 .swiper-slide .slide1{
@@ -325,24 +325,19 @@ main .content{
 
 /*======view_setting_wrap======*/
 .view_setting_toggle{
-	position: relative;
-}
-.view_setting_toggle.pc{
-	width: 1000px;
-	margin: 0 auto;
-}
-.view_setting_toggle > .view_setting_toggle_wrap{
+	width: 100%;
 	position: absolute;
-	right: 20px;
-	bottom: 20px;
+	right: 10%;
+	bottom: 25px;
 	z-index: 10;
-	display: flex;
+}
+.view_setting_toggle .content{
 	flex-flow: column;
 	align-items: end;
-	justify-content: center;
 	gap: 5px;
 }
-.view_setting_toggle > .view_setting_toggle_wrap > div{
+
+.btn_border{
 	width: 45px;
 	height: 45px;
 	border-radius: 50%;
@@ -353,23 +348,24 @@ main .content{
 	background: white;
 	cursor: pointer;
 }
-.view_setting_toggle > .view_setting_toggle_wrap > div:hover{
+.btn_border:hover{
 	border: 1px solid var(--gray-200);
 }
 
 #view_setting {
 	position: absolute;
-	right: 20px;
-	bottom: 20px;
+	right: 0;
+	bottom: 0;
 	z-index: 10;
-}
-.view_setting_wrap{
 	width: 380px;
 	background: var(--white);
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	border : 1px solid var(--border-gray);
 	padding: var(--p-xl);
 	border-radius: var(--radius-xl);
+
+}
+.view_setting_wrap{
 	display: flex;
 	flex-flow: column;
 	justify-content: center;
@@ -487,27 +483,18 @@ footer .content {
 	padding: 0 20px;
 }
 
-/* ===== PC ===== */
-@media screen and (min-width: 1180px) {
-
-}
-
 /* ===== 태블릿,모바일 공통 ===== */
 @media screen and (max-width: 1179px) {
 	.pc{
-		display: none;
+		display: none !important;
 	}
 	.mob{
-		display: block;
+		/*display: block;*/
 	}
 	header .content{
 		padding: 0 20px;
 	}
-	header .view_setting_toggle.mob {
-		position: absolute;
-		right: 20px;
-		top: 12px;
-	}
+
 	main .content{
 		height: calc(100dvh - 130px);
 	}
@@ -537,31 +524,25 @@ footer .content {
 		display: none;
 	}
 
+	.view_setting_toggle{
+		height: fit-content;
+		right: unset;
+		top: 7px;
+	}
+	#view_setting{
+		right: 10px;
+		top: 10px;
+		bottom: unset;
+		padding: var(--p-lg);
+	}
 	/*다크모드일 때 색상반전*/
-	.view_setting_toggle > .view_setting_toggle_wrap > div{
+	.btn_border{
 		background: var(--white);
 		border : 1px solid var(--white);
 	}
-	.view_setting_toggle_wrap.dark img {
+	.btn_border.dark img {
 		filter: brightness(0) invert(1); /*밝기 0(검정), 색상반전(흰색)*/
 	}
-
-	.view_setting_toggle > .view_setting_toggle_wrap {
-		position: unset;
-	}
-	.view_setting_toggle > .view_setting_toggle_wrap > .view_setting_btn{
-		border: none;
-	}
-	.view_setting_toggle > .view_setting_toggle_wrap > .view_setting_btn:hover{
-		border:none;
-	}
-	#view_setting {
-		top: 20px ;
-	}
-	.view_setting_wrap {
-		width: 300px;
-	}
-
 	footer{
 		display: block !important;
 	}
@@ -575,42 +556,22 @@ footer .content {
 	header .tit_wrap{
 		justify-content: start;
 	}
-	.view_setting_wrap{
-		padding: var(--p-lg);
-	}
-
-	.view_setting_wrap .list_wrap > .list p{
-		padding-bottom: 10px;
-	}
 	.view_setting_wrap .list_wrap label.border{
 		white-space: nowrap;
 	}
 }
 @media screen and (max-width: 460px) {
-	#view_setting{
-		width: 90%;
-	}
 	.view_setting_wrap .list_wrap > .list > div {
 		flex-wrap: wrap;
 	}
-	.view_setting_wrap{
-		padding: var(--p-base);
-		width: unset;
-	}
-}
-@media screen and (max-width: 360px) {
 	#view_setting{
-		right: 0;
-		bottom: 0;
-		left: 50%;
-		/*top: 50%;*/
-		transform: translateX(-50%);
+		width: 80%;
+		padding: var(--p-base);
 	}
 	.view_setting_wrap .list_wrap > .list{
-		display: block;
+			 display: block;
+		 }
+	.view_setting_wrap .list_wrap > .list p{
+		padding-bottom: 10px;
 	}
-}
-
-img{
-	filter: brightness(2%);
 }
