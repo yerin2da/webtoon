@@ -169,7 +169,7 @@ header .tit_wrap .sub_tit .ep_box{
 	display: flex;
 	align-items: center;
 	justify-content: end;
-	gap: 10px;
+	gap: 15px;
 	color: var(--text-gray);
 	font-size: var(--smFont);
 }
@@ -574,7 +574,7 @@ footer .content {
 	}
 	#view_setting{
 		width: fit-content;
-		right: 0;
+		/*right: 0;*/
 		padding: var(--p-base);
 	}
 	.view_setting_wrap .list_wrap > .list{
@@ -582,5 +582,10 @@ footer .content {
 		 }
 	.view_setting_wrap .list_wrap > .list p{
 		padding-bottom: 10px;
+	}
+}
+@media screen and (max-width: 260px) {
+	#view_setting{
+		right: 0;
 	}
 }
