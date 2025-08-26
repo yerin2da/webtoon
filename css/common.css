@@ -316,7 +316,7 @@ main .content{
 .swiper-button-next:after,
 .swiper-button-prev:after {
 	padding: 20px;
-	color: var(--gray-800);
+	color: var(--black);
 	font-size: 35px !important;
 }
 
@@ -483,29 +483,7 @@ footer .content {
 	font-size: var(--baseFont);
 	padding: 0 20px;
 }
-/*좌우 클릭시 슬라이드 넘기기*/
-.navigation_wrap {
-	top: 0;
-	transform: none;
-	height: 100%;
-}
-.swiper-button-next,
-.swiper-button-prev{
-	width: 50% !important;
-	height: 100% !important;
-	bottom: 0!important;
-	top: unset!important;
-}
-.swiper-button-next:after,
-.swiper-button-prev:after{
-	display: none;
-}
-.swiper-button-prev{
-	left: 0!important;
-}
-.swiper-button-next{
-	right: 0!important;
-}
+
 /* ===== PC ===== */
 @media screen and (min-width: 1180px) {
 	.mob{
@@ -526,6 +504,41 @@ footer .content {
 	main .content{
 		height: calc(100vh - 130px);
 	}
+
+	/*좌우 클릭시 슬라이드 넘기기*/
+	.navigation_wrap {
+		top: 0;
+		transform: none;
+		height: 100%;
+	}
+	.swiper-button-next,
+	.swiper-button-prev{
+		width: 50% !important;
+		height: 100% !important;
+		bottom: 0!important;
+		top: unset!important;
+	}
+
+	.swiper-button-prev{
+		left: 0!important;
+	}
+	.swiper-button-next{
+		right: 0!important;
+	}
+	.swiper-button-next:after,
+	.swiper-button-prev:after{
+		display: none;
+	}
+
+	/*다크모드일 때 색상반전*/
+	.view_setting_toggle > .view_setting_toggle_wrap > div{
+		background: var(--white);
+		border : 1px solid var(--white);
+	}
+	.view_setting_toggle_wrap.dark img {
+		filter: brightness(0) invert(1); /*밝기 0(검정), 색상반전(흰색)*/
+	}
+
 	.view_setting_toggle > .view_setting_toggle_wrap {
 		position: unset;
 	}
@@ -571,11 +584,6 @@ footer .content {
 @media screen and (max-width: 460px) {
 	#view_setting{
 		width: 90%;
-		/*right: 0;*/
-		/*bottom: 0;*/
-		/*left: 50%;*/
-		/*top: 50%;*/
-		/*transform: translate(-50%, -50%);*/
 	}
 	.view_setting_wrap .list_wrap > .list > div {
 		flex-wrap: wrap;
@@ -596,11 +604,4 @@ footer .content {
 	.view_setting_wrap .list_wrap > .list{
 		display: block;
 	}
-}
-img{
-	/*filter: brightness(2%);*/
-}
-
-header .tit_wrap, #episode_btn{
-	/*display: none;*/
 }
