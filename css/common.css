@@ -574,7 +574,6 @@ footer .content {
 	}
 	#view_setting{
 		width: fit-content;
-		/*right: 0;*/
 		padding: var(--p-base);
 	}
 	.view_setting_wrap .list_wrap > .list{
@@ -584,8 +583,10 @@ footer .content {
 		padding-bottom: 10px;
 	}
 }
-@media screen and (max-width: 260px) {
+@media screen and (max-width: 360px) {
 	#view_setting{
-		right: 0;
+		width: 80%;
+		right: 50%;
+		transform: translateX(50%);
 	}
 }
