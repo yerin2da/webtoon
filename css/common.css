@@ -95,6 +95,12 @@ input[type="checkbox"],input[type="radio"]{
 	height: 100dvh;
 	margin: 0 auto;
 }
+.pc{
+	display: block;
+}
+.mob{
+	display: none;
+}
 
 /*로티 이미지*/
 .lottie_img_wrap{
@@ -108,10 +114,7 @@ input[type="checkbox"],input[type="radio"]{
 	z-index: 10;
 	border-radius: var(--radius-base);
 }
-.dotlottie-wc {
-	/*width: 50%;*/
-	height: auto;
-}
+
 header, main, footer{
 	width: 100%;
 	max-width: 1000px;
@@ -486,13 +489,17 @@ footer .content {
 
 /* ===== PC ===== */
 @media screen and (min-width: 1180px) {
-	.mob{
-		display: none;
-	}
+
 }
 
 /* ===== 태블릿,모바일 공통 ===== */
 @media screen and (max-width: 1179px) {
+	.pc{
+		display: none;
+	}
+	.mob{
+		display: block;
+	}
 	header .content{
 		padding: 0 20px;
 	}
@@ -554,9 +561,7 @@ footer .content {
 	.view_setting_wrap {
 		width: 300px;
 	}
-	.pc{
-		display: none;
-	}
+
 	footer{
 		display: block !important;
 	}
@@ -604,4 +609,8 @@ footer .content {
 	.view_setting_wrap .list_wrap > .list{
 		display: block;
 	}
+}
+
+img{
+	filter: brightness(2%);
 }
