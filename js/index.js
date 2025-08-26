@@ -27,12 +27,11 @@ $("#slide").load("slide.html", function () {
 function intro_animation(){
     const intro = $('.lottie_img_wrap');
     if (window.innerWidth > 1179) {
-        // 로티이미지-스와이프
-        $('.lottie_img_wrap >dotlottie-wc').attr('src', 'https://lottie.host/a5f1cad7-1a3e-4105-9168-dec688961643/qMuRvRIt5c.lottie');
+        $('.pc-lottie').show();
+        $('.mob-lottie').hide();
     } else {
-        //로티이미지-터치
-        $('.lottie_img_wrap >dotlottie-wc').attr('src', 'https://lottie.host/932fdd66-b9b5-45d3-8a00-a14a758f7c69/r0XaoX28T8.lottie');
-
+        $('.pc-lottie').hide();
+        $('.mob-lottie').show();
     }
     // 3초 후 서서히 사라지기
     setTimeout(() => {

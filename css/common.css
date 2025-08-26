@@ -39,7 +39,6 @@
 }
 html, body {
 	overflow: hidden;
-	caret-color: transparent;/*커서 깜빡임 없애기*/
 }
 body {
 	font-family: 'Pretendard', sans-serif;
