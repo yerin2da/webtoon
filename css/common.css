@@ -39,6 +39,7 @@
 }
 html, body {
 	overflow: hidden;
+	caret-color: transparent;/*커서 깜빡임 없애기*/
 }
 body {
 	font-family: 'Pretendard', sans-serif;
@@ -228,8 +229,8 @@ main .content{
 	height: 95%;
 }
 
-.swiper-slide .slide1{
-/*animation: fadezoom 2s 0s forwards;*/
+.swiper-slide .slide7{
+	overflow: hidden;
 }
 .swiper-slide .slide7{
 	max-width: 96%;
@@ -573,4 +574,10 @@ footer .content {
 	.view_setting_wrap .list_wrap > .list p{
 		padding-bottom: 10px;
 	}
+}
+img{
+	filter: brightness(6%);
+}
+header .content{
+	display: none;
 }
