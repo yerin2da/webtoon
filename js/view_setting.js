@@ -27,4 +27,3 @@ $('.switch-input').click(function() {
         if ($('footer').length) $('footer .content').slideDown(300);
     }
 });
-slideUp/Down

@@ -18,26 +18,27 @@ $(document).on('click', '#view_setting .view_setting_close_btn', function () {
     $('#view_setting').fadeOut(300);//0.3초
 });
 
-let isMuted = false;
+let isMuted = true;
 
 // Swiper 초기화
 $("#slide").load("slide.html", function () {
     slide_reset('');//기본 슬라이드
     intro_animation();
     // 초기 슬라이드 소리 재생
-    // if (!isMuted) sound[0].play();
+    if (!isMuted) sound[0].play();
 
-
-
-    $('#sound_btn').click(function() {
+    $('#sound_btn').click(function () {
         isMuted = !isMuted; // 상태 변경
-
         if (isMuted) {
             // 모든 사운드 뮤트
             sound.forEach(s => s.volume(0));
+            $('#sound_btn i').attr('class', 'fa-solid fa-volume-xmark');
+
         } else {
             // 모든 사운드 원래 볼륨으로
             sound.forEach(s => s.volume(0.5));
+            $('#sound_btn i').attr('class', 'fa-solid fa-volume-high');
+
         }
     });
 });
