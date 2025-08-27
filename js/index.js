@@ -28,11 +28,15 @@ $("#slide").load("slide.html", function () {
 });
 
 $(document).on('click', '#sound_btn', function () {
-    initSoundBtn();
-    // // 첫 슬라이드 사운드 자동 재생
-    // if (!isMuted && sound[0]) {
-    //     sound[0].play();
-    // }
+// 모바일 브라우저 AudioContext 활성화
+    if (Howler.ctx.state === 'suspended') {
+        Howler.ctx.resume().then(() => {
+            console.log('AudioContext resumed');
+            initSoundBtn();
+        });
+    } else {
+        initSoundBtn();
+    }
 });
 
 function initSoundBtn() {
