@@ -29,10 +29,10 @@ $("#slide").load("slide.html", function () {
 
 $(document).on('click', '#sound_btn', function () {
     initSoundBtn();
-    // 첫 슬라이드 사운드 자동 재생
-    if (!isMuted && sound[0]) {
-        sound[0].play();
-    }
+    // // 첫 슬라이드 사운드 자동 재생
+    // if (!isMuted && sound[0]) {
+    //     sound[0].play();
+    // }
 });
 
 function initSoundBtn() {
@@ -43,6 +43,13 @@ function initSoundBtn() {
     } else {
         sound.forEach(s => s.volume(0.5));
         $('#sound_btn i').attr('class', 'fa-solid fa-volume-high');
+
+        // 사운드 해제 직후 현재 슬라이드 사운드 재생
+        const currentIndex = swiper ? swiper.realIndex : 0;
+        if (sound[currentIndex]) {
+            sound[currentIndex].stop();
+            sound[currentIndex].play();
+        }
     }
     console.log(isMuted)
 
@@ -70,7 +77,7 @@ $('.go_first').click(function () {
 
 // 슬라이드별 사운드 미리 정의
 const sound = [
-    new Howl({ src: ['./img/sound/cute-bgm.m4a'], volume: 0.5, loop:true }),//1
+    new Howl({ src: ['./img/sound/cute-bgm.m4a'], volume: 0.5 }),//1
 
     new Howl({ src: ['./img/sound/bubble-pop.mp3'], volume: 0.5,}),//2
 
@@ -82,7 +89,7 @@ const sound = [
 
     new Howl({ src: ['./img/sound/cute-twinkle.mp3'], volume: 0.5, }),//6
 
-    new Howl({ src: ['./img/sound/cute-bgm.m4a'], volume: 0.5, loop:true }),//7
+    new Howl({ src: ['./img/sound/cute-bgm.m4a'], volume: 0.5, }),//7
 ];
 
 
@@ -143,10 +150,19 @@ $(document).on('change', 'input[name="effect-input"]', function () {
     else if (this.id === 'flip-input') {
         selectedEffect = 'creative';
     }
+    //기존 사운드 초기화
+    sound.forEach(s => s.stop());
 
     $("#slide").load(slideFile, function () {
         $("#flip").hide();
         $("#slide").show();
         slide_reset(selectedEffect);
+        // 현재 슬라이드 소리만 재생
+        if (!isMuted && swiper) {
+            const currentIndex = swiper.realIndex;
+            if (sound[currentIndex]) {
+                sound[currentIndex].play();
+            }
+        }
     });
 });
