@@ -23,40 +23,33 @@ $("#slide").load("slide.html", function () {
     slide_reset('');//기본 슬라이드
     intro_animation();
     // 초기 슬라이드 소리 재생
-    // if (!isMuted) sound[0].play();
-    // initSoundBtn();
-});
-// $(document).on('click', '#sound_btn', function () {
-//     initSoundBtn()
-// });
-//
-// function initSoundBtn() {
-//     isMuted = !isMuted;
-//     if (isMuted) {
-//         sound.forEach(s => s.volume(0));
-//         $('#sound_btn i').attr('class', 'fa-solid fa-volume-xmark');
-//     } else {
-//         sound.forEach(s => s.volume(0.5));
-//         $('#sound_btn i').attr('class', 'fa-solid fa-volume-high');
-//     }
-// }
-let soundStarted = false; // 모바일 초기 재생 체크
+    console.log(isMuted)
+    if(!isMuted) sound[0].play();
+    // 모바일 브라우저용: 사운드 객체를 유저 액션 전 상태에서 활성화
 
-$(document).on('click touchstart', '#sound_btn', function () {
-    if (!soundStarted) {
-        // 첫 클릭 시 모든 사운드 한번씩 play & 바로 stop
-        sound.forEach(s => {
-            s.play();
-            s.stop();
-        });
-        soundStarted = true;
+
+});
+
+$(document).on('click', '#sound_btn', function () {
+    initSoundBtn();
+    // 첫 슬라이드 사운드 자동 재생
+    if (!isMuted && sound[0]) {
+        sound[0].play();
     }
-
-    // 토글 음소거
-    isMuted = !isMuted;
-    sound.forEach(s => s.volume(isMuted ? 0 : 0.5));
-    $('#sound_btn i').attr('class', isMuted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high');
 });
+
+function initSoundBtn() {
+    isMuted = !isMuted;
+    if (isMuted) {
+        sound.forEach(s => s.volume(0));
+        $('#sound_btn i').attr('class', 'fa-solid fa-volume-xmark');
+    } else {
+        sound.forEach(s => s.volume(0.5));
+        $('#sound_btn i').attr('class', 'fa-solid fa-volume-high');
+    }
+    console.log(isMuted)
+
+}
 
 function intro_animation() {
     const intro = $('.lottie_img_wrap');
@@ -80,13 +73,31 @@ $('.go_first').click(function () {
 
 // 슬라이드별 사운드 미리 정의
 const sound = [
-    new Howl({ src: ['./img/sound/bubble-pop.mp3'], volume: 0.5 }),//1
-    new Howl({ src: ['./img/sound/bubble-pop.mp3'], volume: 0.5 }),//2
-    new Howl({ src: ['./img/sound/funny-boing.mp3'], volume: 0.5 }),//3
-    new Howl({ src: ['./img/sound/food-splat.mp3'], volume: 0.5 }),//4
-    new Howl({ src: ['./img/sound/glass-breaking.mp3'], volume: 0.5 }),//5
-    new Howl({ src: ['./img/sound/cute-twinkle.mp3'], volume: 0.5 }),//6
-    new Howl({ src: ['./img/sound/cute-bgm.m4a'], volume: 0.5 }),//7
+    new Howl({ src: ['./img/sound/bubble-pop2.mp3'], volume: 0.5,
+        onend: function () {
+            alert('1Finished!');
+        } }),//1
+    new Howl({ src: ['./img/sound/bubble-pop.mp3'], volume: 0.5,
+        onend: function () {
+            alert('2Finished!');
+        } }),//2
+    new Howl({ src: ['./img/sound/funny-boing.mp3'], volume: 0.5,
+        onend: function () {
+            alert('3Finished!');
+        } }),//3
+    new Howl({ src: ['./img/sound/food-splat.mp3'], volume: 0.5,
+        onend: function () {
+            alert('4Finished!');
+        } }),//4
+    new Howl({ src: ['./img/sound/glass-breaking.mp3'], volume: 0.5,
+        onend: function () {
+            alert('5Finished!');
+        } }),//5
+    new Howl({ src: ['./img/sound/cute-twinkle.mp3'], volume: 0.5,
+        onend: function () {
+            alert('6Finished!');
+        } }),//6
+    new Howl({ src: ['./img/sound/cute-bgm.m4a'], volume: 0.5, loop:true }),//7
 ];
 
 
@@ -124,7 +135,11 @@ function slide_reset(selectedEffect = '') {
                 if (progressBar) progressBar.style.width = ((index + 1) / this.slides.length * 100) + "%";
 
                 sound.forEach(s => s.stop());
-                if (sound[index]) sound[index].play();
+                // if (sound[index]) sound[index].play();
+                // 뮤트 상태가 아니라면 해당 슬라이드 소리 재생
+                if (!isMuted && sound[index]) {
+                    sound[index].play();
+                }
             }
         }
     });

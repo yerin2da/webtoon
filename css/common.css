@@ -520,6 +520,7 @@ footer .content {
 	.view_setting_toggle{
 		right: 3%;
 		top: 8px;
+		height: fit-content;
 	}
 	.setting_btn{
 		justify-content: start;
