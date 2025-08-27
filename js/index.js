@@ -11,20 +11,38 @@ $("#view_setting").load("view_setting.html");
 
 //뷰어설정
 $('#view_setting').hide();
-$('.setting_btn').click(function (){
+$('.setting_btn').click(function () {
     $('#view_setting').fadeIn(300);//0.3초
 });
-$(document).on('click', '#view_setting .view_setting_close_btn',function (){
+$(document).on('click', '#view_setting .view_setting_close_btn', function () {
     $('#view_setting').fadeOut(300);//0.3초
 });
+
+let isMuted = false;
 
 // Swiper 초기화
 $("#slide").load("slide.html", function () {
     slide_reset('');//기본 슬라이드
     intro_animation();
+    // 초기 슬라이드 소리 재생
+    // if (!isMuted) sound[0].play();
+
+
+
+    $('#sound_btn').click(function() {
+        isMuted = !isMuted; // 상태 변경
+
+        if (isMuted) {
+            // 모든 사운드 뮤트
+            sound.forEach(s => s.volume(0));
+        } else {
+            // 모든 사운드 원래 볼륨으로
+            sound.forEach(s => s.volume(0.5));
+        }
+    });
 });
 
-function intro_animation(){
+function intro_animation() {
     const intro = $('.lottie_img_wrap');
     if (window.innerWidth > 1179) {
         $('.pc-lottie').show();
@@ -39,7 +57,7 @@ function intro_animation(){
     }, 3000); // 3초 후 실행
 }
 
-$('.go_first').click(function (){
+$('.go_first').click(function () {
     swiper.slideToLoop(0);//슬라이드 맨 처음으로 이동
 });
 //넘김효과 선택
@@ -60,7 +78,7 @@ $(document).on('change', 'input[name="effect-input"]', function () {
         });
 
     } else if (this.id === 'flip-input') {// 플립
-        $("#flip").load("slide2.html", function() {
+        $("#flip").load("slide2.html", function () {
             $("#slide").hide();
             $("#flip").show();
             flip_slide();
@@ -75,10 +93,21 @@ $(document).on('change', 'input[name="effect-input"]', function () {
             $("#slide").show();
         });
     }
-});
+})
+
+// 슬라이드별 사운드 미리 정의
+const sound = [
+    new Howl({ src: ['./img/sound/bubble-pop.mp3'], volume: 0.5 }),//1
+    new Howl({ src: ['./img/sound/bubble-pop.mp3'], volume: 0.5 }),//2
+    new Howl({ src: ['./img/sound/funny-boing.mp3'], volume: 0.5 }),//3
+    new Howl({ src: ['./img/sound/food-splat.mp3'], volume: 0.5 }),//4
+    new Howl({ src: ['./img/sound/glass-breaking.mp3'], volume: 0.5 }),//5
+    new Howl({ src: ['./img/sound/cute-twinkle.mp3'], volume: 0.5 }),//6
+    new Howl({ src: ['./img/sound/cute-bgm.m4a'], volume: 0.5 }),//7
+];
 
 //슬라이드 초기설정
-function slide_reset(selectedEffect){
+function slide_reset(selectedEffect) {
     const progressCircle = document.querySelector(".autoplay-progress svg");
     const progressContent = document.querySelector(".autoplay-progress span");
 
@@ -109,8 +138,14 @@ function slide_reset(selectedEffect){
         },
         on: {
             slideChange: function () {
+                let index = this.realIndex; // 현재 슬라이드 인덱스
                 let progress = ((this.realIndex + 1) / this.slides.length) * 100;
                 document.querySelector(".swiper-pagination-progress").style.width = progress + "%";
+
+                sound.forEach(s => s.stop()); // 모든 소리 중지
+                if (sound[index]) {
+                    sound[index].play();
+                }
             }
         }
     });
@@ -120,6 +155,7 @@ function flip_slide() {
     swiper = new Swiper(".mySwiper.perspective", {
         slidesPerView: 1,
         spaceBetween: 0,
+        effect: "creative",
         rtl: true,
         centeredSlides: false,
         speed: 1000,
@@ -139,7 +175,6 @@ function flip_slide() {
             enabled: true,
             onlyInViewport: true,
         },
-        effect: "creative",
         creativeEffect: {
             prev: {
                 shadow: false,

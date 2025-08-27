@@ -1,16 +1,4 @@
-// 상하단바 숨기기
-$('.switch-input').click(function() {
-    let isChecked = $(this).is(':checked');
-
-    if (isChecked) {
-        if ($('header').length) $('header .content').slideUp(300);// header가 있으면
-        if ($('footer').length) $('footer .content').slideUp(300);// footer가 있으면
-    } else {
-        if ($('header').length) $('header .content').slideDown(300);
-        if ($('footer').length) $('footer .content').slideDown(300);
-    }
-});
-
+// 배경색 설정
 $('input[name="bg-input"]').change(function() {
     if (this.id === 'white-input') {// 라이트 모드
         document.documentElement.style.setProperty('--white', '#fff');
@@ -26,3 +14,17 @@ $('input[name="bg-input"]').change(function() {
 
     }
 });
+
+// 상하단바 숨기기
+$('.switch-input').click(function() {
+    let isChecked = $(this).is(':checked');
+
+    if (isChecked) {
+        if ($('header').length) $('header .content').slideUp(300);// header가 있으면
+        if ($('footer').length) $('footer .content').slideUp(300);// footer가 있으면
+    } else {
+        if ($('header').length) $('header .content').slideDown(300);
+        if ($('footer').length) $('footer .content').slideDown(300);
+    }
+});
+slideUp/Down
