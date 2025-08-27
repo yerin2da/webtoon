@@ -73,7 +73,7 @@ $('.go_first').click(function () {
 
 // 슬라이드별 사운드 미리 정의
 const sound = [
-    new Howl({ src: ['./img/sound/bubble-pop2.mp3'], volume: 0.5,
+    new Howl({ src: ['./img/sound/bubble-pop.mp3'], volume: 0.5,
         onend: function () {
             alert('1Finished!');
         } }),//1
