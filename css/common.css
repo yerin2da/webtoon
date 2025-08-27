@@ -153,10 +153,6 @@ header .tit_wrap .sub_tit .ep_box{
 	font-size: var(--mdFont);
 }
 
-img{
-	filter: brightness(2%);
-}
-
 #sound_btn{
 	padding: 5px;
 	color: var(--black)!important;
@@ -238,14 +234,6 @@ main .content{
 	overflow: hidden;
 	max-width: 96%;
 }
-/*@keyframes fadezoom{*/
-/*	0% {*/
-/*		transform: scale(1.15);*/
-/*	}*/
-/*	100% {*/
-/*		transform: scale(1);*/
-/*	}*/
-/*}*/
 
 /*페이지네이션*/
 .pagination_wrap{
@@ -508,6 +496,7 @@ footer .content {
 		top: 0;
 		transform: none;
 		height: 100%;
+
 	}
 	.swiper-button-next,
 	.swiper-button-prev{
@@ -588,4 +577,7 @@ footer .content {
 	.view_setting_wrap .list_wrap > .list p{
 		padding-bottom: 10px;
 	}
+}
+img{
+	filter: brightness(2%);
 }
