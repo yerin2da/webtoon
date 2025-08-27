@@ -25,9 +25,6 @@ $("#slide").load("slide.html", function () {
     // 초기 슬라이드 소리 재생
     console.log(isMuted)
     if(!isMuted) sound[0].play();
-    // 모바일 브라우저용: 사운드 객체를 유저 액션 전 상태에서 활성화
-
-
 });
 
 $(document).on('click', '#sound_btn', function () {
@@ -73,30 +70,18 @@ $('.go_first').click(function () {
 
 // 슬라이드별 사운드 미리 정의
 const sound = [
-    new Howl({ src: ['./img/sound/bubble-pop.mp3'], volume: 0.5,
-        onend: function () {
-            alert('1Finished!');
-        } }),//1
-    new Howl({ src: ['./img/sound/bubble-pop.mp3'], volume: 0.5,
-        onend: function () {
-            alert('2Finished!');
-        } }),//2
-    new Howl({ src: ['./img/sound/funny-boing.mp3'], volume: 0.5,
-        onend: function () {
-            alert('3Finished!');
-        } }),//3
-    new Howl({ src: ['./img/sound/food-splat.mp3'], volume: 0.5,
-        onend: function () {
-            alert('4Finished!');
-        } }),//4
-    new Howl({ src: ['./img/sound/glass-breaking.mp3'], volume: 0.5,
-        onend: function () {
-            alert('5Finished!');
-        } }),//5
-    new Howl({ src: ['./img/sound/cute-twinkle.mp3'], volume: 0.5,
-        onend: function () {
-            alert('6Finished!');
-        } }),//6
+    new Howl({ src: ['./img/sound/cute-bgm.m4a'], volume: 0.5, loop:true }),//1
+
+    new Howl({ src: ['./img/sound/bubble-pop.mp3'], volume: 0.5,}),//2
+
+    new Howl({ src: ['./img/sound/funny-boing.mp3'], volume: 0.5,}),//3
+
+    new Howl({ src: ['./img/sound/food-splat.mp3'], volume: 0.5,}),//4
+
+    new Howl({ src: ['./img/sound/glass-breaking.mp3'], volume: 0.5,}),//5
+
+    new Howl({ src: ['./img/sound/cute-twinkle.mp3'], volume: 0.5, }),//6
+
     new Howl({ src: ['./img/sound/cute-bgm.m4a'], volume: 0.5, loop:true }),//7
 ];
 
@@ -149,13 +134,14 @@ function slide_reset(selectedEffect = '') {
 $(document).on('change', 'input[name="effect-input"]', function () {
     $('input[name="effect-input"]').prop('checked', false);
     $(this).prop('checked', true);
-
     let selectedEffect = '';
     let slideFile = 'slide.html';
-    if (this.id === 'fade-input') selectedEffect = 'fade';
+
+    if (this.id === 'fade-input') {
+        selectedEffect = 'fade';
+    }
     else if (this.id === 'flip-input') {
         selectedEffect = 'creative';
-        slideFile = 'slide2.html'; // flip은 별도 HTML
     }
 
     $("#slide").load(slideFile, function () {
